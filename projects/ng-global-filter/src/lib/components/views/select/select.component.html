@@ -1,0 +1,17 @@
+@let state = store.state();
+@let items = store.items();
+
+<gf-loading-state [state]="state"
+                  [showContentOnInit]="false">
+  @if(items.length) {
+  <mat-radio-group class="items">
+    @for(item of items; track item.value) {
+    <mat-radio-button class="item"
+                      [checked]="item.checked"
+                      (change)="select(item)"
+                      [value]="item.value">{{ item.label }}</mat-radio-button>
+    }
+  </mat-radio-group>
+  }
+  @else {No Records}
+</gf-loading-state>

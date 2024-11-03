@@ -1,0 +1,36 @@
+@let filters = globalStore.activeFiltersWithValue();
+
+<mat-chip-set>
+  @for (filter of filters; track filter.key) {
+    @if(filter.type === FilterType.select) {
+      @if (filter.props.multiple) {
+        @for(item of $any(filter.value); track item) {
+          <ng-container [ngTemplateOutlet]="matChip"
+                        [ngTemplateOutletContext]="{ filter: filter, value: item }"></ng-container>
+        }
+      }
+      @else if (filter.value) {
+        <ng-container [ngTemplateOutlet]="matChip"
+                      [ngTemplateOutletContext]="{ filter: filter, value: filter.value }"></ng-container>
+      }
+    }
+
+    @if(filter.type === FilterType.input && filter.value) {
+      <ng-container [ngTemplateOutlet]="matChip"
+                    [ngTemplateOutletContext]="{ filter: filter, value: filter.value }"></ng-container>
+    }
+  }
+</mat-chip-set>
+
+<ng-template #matChip
+             let-filter="filter"
+             let-value="value">
+  <mat-chip>
+    {{ value }}
+    <button matChipRemove
+            [attr.aria-label]="'remove ' + value"
+            (click)="removeSelection(filter, value)">
+      <mat-icon>cancel</mat-icon>
+    </button>
+  </mat-chip>
+</ng-template>

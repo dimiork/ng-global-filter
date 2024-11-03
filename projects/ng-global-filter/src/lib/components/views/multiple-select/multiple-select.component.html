@@ -1,0 +1,27 @@
+@let state = store.state();
+@let items = store.items();
+@let allRecordsSelected = allItemsSelected();
+
+<gf-loading-state [state]="state"
+                  [showContentOnInit]="false">
+  @if(items.length) {
+  <div class="actions">
+    <button mat-stroked-button
+            aria-label="Toggle selection"
+            (click)="toggleAllSelection(allRecordsSelected)">
+      @if (allRecordsSelected) {Clear Selected}
+      @else {Select All}
+    </button>
+  </div>
+  <mat-divider [style.margin]="'10px 0'"></mat-divider>
+  <div class="items">
+
+    @for(item of items; track item.value) {
+    <mat-checkbox [checked]="item.checked"
+                  (change)="toggleSelection(item, $event)"
+                  class="item">{{ item.label }}</mat-checkbox>
+    }
+  </div>
+  }
+  @else {No items}
+</gf-loading-state>

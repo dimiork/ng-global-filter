@@ -1,0 +1,4 @@
+export enum DEBOUNCE_TIME {
+  USER_INPUT = 275,
+  USER_SELECT = 550,
+};

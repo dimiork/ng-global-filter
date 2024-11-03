@@ -1,0 +1,13 @@
+::ng-deep .item label {
+  margin-bottom: 0;
+}
+
+.items {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.item {
+  width: 50%;
+  user-select: none;
+}

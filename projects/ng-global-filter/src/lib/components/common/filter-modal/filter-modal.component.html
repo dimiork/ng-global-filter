@@ -1,0 +1,28 @@
+<div class="filter-modal">
+  <div class="title">
+    <h2>Filters</h2>
+  </div>
+  <div class="filter-modal">
+    @for(record of filters; track record.id) {
+    <mat-accordion>
+      <mat-expansion-panel [expanded]="!record.expandable"
+                           [hideToggle]="!record.expandable">
+        <mat-expansion-panel-header #header
+                                    (click)="!record.expandable && header._toggle()">
+          <mat-panel-title> {{ record?.label }} ({{ record.local ? 'local' : 'global '}}) </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
+          <!-- Select -->
+          @if(record.type === FilterType.select) {
+            @if (!record.props.multiple) { <gf-select [record]="record"></gf-select> }
+            @else { <gf-multiple-select [record]="record"></gf-multiple-select> }
+          }
+          <!-- Input -->
+          @if(record.type === FilterType.input) { <gf-input [record]="record"></gf-input> }
+        </ng-template>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <mat-divider></mat-divider>
+    }
+  </div>
+</div>

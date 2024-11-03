@@ -1,0 +1,16 @@
+@if (state === LoadingState.LOADING) {
+Loading...
+}
+
+@if (state === LoadingState.ERROR) {
+Error
+}
+
+@if(showContentOnInit) {
+  <ng-content></ng-content>
+}
+@if(!showContentOnInit) {
+  @if (state === LoadingState.LOADED) {
+    <ng-content></ng-content>
+  }
+}

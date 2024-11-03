@@ -1,0 +1,13 @@
+:host {
+  display: contents;
+}
+
+.filter {
+  display: flex;
+  padding: 10px;
+  gap: 10px;
+}
+
+.filter__content {
+  flex: 1;
+}
